@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include "Grid.h"
 
 int main()
 {
@@ -8,6 +9,8 @@ int main()
 
     sf::RenderWindow window(sf::VideoMode(sf::Vector2u(COLS * CELL_SIZE, ROWS * CELL_SIZE)), "Pathfinding Visualizer");
 
+    Grid grid(ROWS, COLS, CELL_SIZE);
+
     while (window.isOpen())
     {
         while (auto event = window.pollEvent())
@@ -16,22 +19,10 @@ int main()
                 window.close();
         }
 
+        grid.handleMouse(window);
+
         window.clear();
-
-        // DRAW GRID
-        for (int i = 0; i < ROWS; i++)
-        {
-            for (int j = 0; j < COLS; j++)
-            {
-                sf::RectangleShape cell(sf::Vector2f(CELL_SIZE - 1, CELL_SIZE - 1));
-
-                cell.setPosition(sf::Vector2f(j * CELL_SIZE, i * CELL_SIZE));
-                cell.setFillColor(sf::Color::White);
-
-                window.draw(cell);
-            }
-        }
-
+        grid.draw(window);
         window.display();
     }
 
