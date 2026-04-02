@@ -12,4 +12,8 @@ public:
 private:
     int rows, cols, cellSize;
     int grid[50][50]; // max size
+    // to remember start and end node
+    int startRow = -1, startCol = -1;
+    int endRow = -1, endCol = -1;
+
 };
