@@ -6,10 +6,11 @@ Grid::Grid(int rows, int cols, int cellSize)
     this->cols = cols;
     this->cellSize = cellSize;
 
-    for (int i = 0; i < rows; i++)
-        for (int j = 0; j < cols; j++)
-            grid[i][j] = 0;
+    // 🔥 THIS LINE WAS MISSING
+    grid = std::vector<std::vector<int>>(rows, std::vector<int>(cols, 0));
 }
+
+
 // we change it to give function or instruction to add start node and end node using some functions.
 void Grid::handleMouse(sf::RenderWindow& window)
 {
@@ -83,4 +84,29 @@ else
             window.draw(cell);
         }
     }
+}
+
+std::vector<std::vector<int>>& Grid::getGrid()
+{
+    return grid;
+}
+
+int Grid::getStartRow()
+{
+    return startRow;
+}
+
+int Grid::getStartCol()
+{
+    return startCol;
+}
+
+int Grid::getEndRow()
+{
+    return endRow;
+}
+
+int Grid::getEndCol()
+{
+    return endCol;
 }
