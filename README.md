@@ -1,7 +1,7 @@
-# 🧭 Pathfinding Visualizer (C++)
+# 🧭 Pathfinding Visualizer (C++ + SFML)
 
 A visual simulation of pathfinding algorithms built using **C++** and **SFML**.
-This project allows users to interactively create a grid, place obstacles, and define start/end nodes.
+This project allows users to interactively create a grid, place obstacles, and visualize how algorithms explore paths.
 
 ---
 
@@ -11,7 +11,7 @@ This project allows users to interactively create a grid, place obstacles, and d
 * ⬛ Mouse-based wall creation
 * 🟢 Start node selection (**Press ****`S`**** + Click**)
 * 🔴 End node selection (**Press ****`E`**** + Click**)
-* ⚡ Real-time rendering using SFML
+* 🔵 BFS visualization (visited cells highlighted in real-time)
 
 ---
 
@@ -19,6 +19,12 @@ This project allows users to interactively create a grid, place obstacles, and d
 
 * **Language:** C++
 * **Graphics Library:** SFML
+* **Concepts Used:**
+
+  * Object-Oriented Programming (OOP)
+  * Breadth First Search (BFS)
+  * 2D Grid Representation
+  * Event Handling
 
 ---
 
@@ -27,7 +33,7 @@ This project allows users to interactively create a grid, place obstacles, and d
 ### 1. Compile
 
 ```bash
-g++ src/main.cpp src/Grid.cpp -std=c++17 -IC:\SFML\include -Iinclude -LC:\SFML\lib -lsfml-graphics -lsfml-window -lsfml-system -o main
+g++ src/main.cpp src/Grid.cpp src/Pathfinding.cpp -std=c++17 -IC:\SFML\include -Iinclude -LC:\SFML\lib -lsfml-graphics -lsfml-window -lsfml-system -o main
 ```
 
 ### 2. Run
@@ -45,6 +51,7 @@ g++ src/main.cpp src/Grid.cpp -std=c++17 -IC:\SFML\include -Iinclude -LC:\SFML\l
 | Create Wall    | Left Click        |
 | Set Start Node | Press `S` + Click |
 | Set End Node   | Press `E` + Click |
+| Run BFS        | Press `Space`     |
 
 ---
 
@@ -55,22 +62,43 @@ PathfindingVisualizer/
 ├── src/
 │   ├── main.cpp
 │   ├── Grid.cpp
+│   ├── Pathfinding.cpp
 ├── include/
 │   ├── Grid.h
+│   ├── Pathfinding.h
 ├── assets/
-├── README.md 
+├── README.md
 ├── .gitignore
 ```
 
 ---
 
-## 🔮 Upcoming Features
+## 🧠 How It Works
 
-* 🔍 BFS (Breadth First Search) Visualization
-* ⚡ Dijkstra Algorithm
-* 🚀 A* Algorithm
-* 🎞️ Path animation
+* The grid is represented using a **2D vector**
+* BFS (Breadth First Search) explores the grid **level-by-level**
+* Each visited cell is marked and visualized in **blue**
+* Walls block traversal and are ignored during BFS
 
 ---
 
+## 🔮 Upcoming Features
 
+* 🎞️ Step-by-step BFS animation
+* 🟡 Shortest path highlighting
+* ⚡ Speed control for visualization
+* 🔁 Reset / Clear grid functionality
+* 🚀 Additional algorithms (Dijkstra, A*)
+
+---
+
+## ⭐ Notes
+
+This project demonstrates:
+
+* Clean project structure using `.h` and `.cpp` separation
+* Implementation of graph traversal algorithms
+* Real-time visualization using SFML
+
+---
+CODER:-> DEV SHARMA
