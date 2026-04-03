@@ -101,4 +101,14 @@ This project demonstrates:
 * Real-time visualization using SFML
 
 ---
+
+
+
+### added something new
+✔ BFS visualization implemented
+✔ Step-by-step animation
+
+
+
+
 CODER:-> DEV SHARMA

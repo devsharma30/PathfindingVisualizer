@@ -25,9 +25,9 @@ int main()
 
         grid.handleMouse(window);
         if (bfsStarted)
-{
-    pathfinder.stepBFS(grid.getGrid());
-}
+        {
+           pathfinder.stepBFS(grid.getGrid());
+        }
 
 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 {
