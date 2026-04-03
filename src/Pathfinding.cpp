@@ -1,63 +1,50 @@
 #include "Pathfinding.h"
-#include <queue>
-#include <vector>
 
-void Pathfinding::bfs(std::vector<std::vector<int>>& grid,
-                      int startRow, int startCol,
-                      int endRow, int endCol)
+void Pathfinding::startBFS(std::vector<std::vector<int>>& grid,
+                           int startRow, int startCol,
+                           int endRow, int endCol)
 {
-    int rows = grid.size();
-    int cols = grid[0].size();
+    rows = grid.size();
+    cols = grid[0].size();
 
-    // visited array
-    std::vector<std::vector<bool>> visited(rows, std::vector<bool>(cols, false));
+    visited = std::vector<std::vector<bool>>(rows, std::vector<bool>(cols, false));
 
-    std::queue<std::pair<int, int>> q;
+    while (!q.empty()) q.pop();
 
-    // start from starting node
     q.push({startRow, startCol});
     visited[startRow][startCol] = true;
 
-    // directions (UP, DOWN, LEFT, RIGHT)
+    finished = false;
+}
+
+void Pathfinding::stepBFS(std::vector<std::vector<int>>& grid)
+{
+    if (q.empty() || finished) return;
+
+    auto current = q.front();
+    q.pop();
+
+    int r = current.first;
+    int c = current.second;
+
     int dr[] = {-1, 1, 0, 0};
     int dc[] = {0, 0, -1, 1};
 
-    while (!q.empty())
+    for (int i = 0; i < 4; i++)
     {
-        auto current = q.front();
-        q.pop();
+        int nr = r + dr[i];
+        int nc = c + dc[i];
 
-        int r = current.first;
-        int c = current.second;
-
-        // if reached end → stop
-        if (r == endRow && c == endCol)
+        if (nr >= 0 && nr < rows && nc >= 0 && nc < cols)
         {
-            return;
-        }
-
-        // explore neighbors
-        for (int i = 0; i < 4; i++)
-        {
-            int nr = r + dr[i];
-            int nc = c + dc[i];
-
-            // ✅ VERY IMPORTANT: boundary check
-            if (nr >= 0 && nr < rows && nc >= 0 && nc < cols)
+            if (!visited[nr][nc] && grid[nr][nc] != 1)
             {
-                // if not visited and not a wall
-                if (!visited[nr][nc] && grid[nr][nc] != 1)
-                {
-                    visited[nr][nc] = true;
+                visited[nr][nc] = true;
 
-                    if (grid[nr][nc] != 3) 
-                        grid[nr][nc] = 4;
+                if (grid[nr][nc] != 3) // don't overwrite end
+                    grid[nr][nc] = 4;
 
-
-
-
-                    q.push({nr, nc});
-                }
+                q.push({nr, nc});
             }
         }
     }

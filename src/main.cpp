@@ -13,6 +13,8 @@ int main()
 
     Grid grid(ROWS, COLS, CELL_SIZE);
 
+    bool bfsStarted = false;
+
     while (window.isOpen())
     {
         while (auto event = window.pollEvent())
@@ -22,22 +24,25 @@ int main()
         }
 
         grid.handleMouse(window);
-
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+        if (bfsStarted)
 {
-    int sr = grid.getStartRow();
-    int sc = grid.getStartCol();
-    int er = grid.getEndRow();
-    int ec = grid.getEndCol();
+    pathfinder.stepBFS(grid.getGrid());
+}
 
-    
-    if (sr >= 0 && sc >= 0 && er >= 0 && ec >= 0)
+if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+{
+    if (!bfsStarted)
     {
-        pathfinder.bfs(
-            grid.getGrid(),
-            sr, sc,
-            er, ec
-        );
+        int sr = grid.getStartRow();
+        int sc = grid.getStartCol();
+        int er = grid.getEndRow();
+        int ec = grid.getEndCol();
+
+        if (sr >= 0 && sc >= 0 && er >= 0 && ec >= 0)
+        {
+            pathfinder.startBFS(grid.getGrid(), sr, sc, er, ec);
+            bfsStarted = true;
+        }
     }
 }
 
