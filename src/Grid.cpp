@@ -6,7 +6,7 @@ Grid::Grid(int rows, int cols, int cellSize)
     this->cols = cols;
     this->cellSize = cellSize;
 
-    // 🔥 THIS LINE WAS MISSING
+    visited = std::vector<std::vector<bool>>(rows, std::vector<bool>(cols, false));
     grid = std::vector<std::vector<int>>(rows, std::vector<int>(cols, 0));
 }
 
@@ -73,13 +73,17 @@ void Grid::draw(sf::RenderWindow& window)
             cell.setPosition(sf::Vector2f(j * cellSize, i * cellSize));
 
             if (grid[i][j] == 1)
-    cell.setFillColor(sf::Color::Black);
-else if (grid[i][j] == 2)
-    cell.setFillColor(sf::Color::Green);
-else if (grid[i][j] == 3)
-    cell.setFillColor(sf::Color::Red);
-else
-    cell.setFillColor(sf::Color::White);
+                cell.setFillColor(sf::Color::Black);
+            else if (grid[i][j] == 2)
+                cell.setFillColor(sf::Color::Green);
+            else if (grid[i][j] == 3)
+                cell.setFillColor(sf::Color::Red);
+
+            else if (grid[i][j] == 4)
+                cell.setFillColor(sf::Color::Blue);
+
+            else
+                cell.setFillColor(sf::Color::White);
 
             window.draw(cell);
         }

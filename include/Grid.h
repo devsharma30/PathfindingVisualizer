@@ -19,6 +19,7 @@ public:
 private:
     int rows, cols, cellSize;
     std::vector<std::vector<int>> grid;
+    std::vector<std::vector<bool>> visited;
     // to remember start and end node
     int startRow = -1, startCol = -1;
     int endRow = -1, endCol = -1;

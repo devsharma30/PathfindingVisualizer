@@ -49,6 +49,13 @@ void Pathfinding::bfs(std::vector<std::vector<int>>& grid,
                 if (!visited[nr][nc] && grid[nr][nc] != 1)
                 {
                     visited[nr][nc] = true;
+
+                    if (grid[nr][nc] != 3) 
+                        grid[nr][nc] = 4;
+
+
+
+
                     q.push({nr, nc});
                 }
             }
