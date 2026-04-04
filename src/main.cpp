@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Grid.h"
 #include "Pathfinding.h"
+#include <iostream>
 
 int main()
 { 
@@ -11,7 +12,40 @@ int main()
 
     sf::RenderWindow window(sf::VideoMode(sf::Vector2u(COLS * CELL_SIZE, ROWS * CELL_SIZE)), "Pathfinding Visualizer");
 
-    Grid grid(ROWS, COLS, CELL_SIZE);
+    Grid grid(ROWS, COLS, CELL_SIZE);  // shift grid down
+
+ // ================= FONT =================
+    sf::Font font;
+    if (!font.openFromFile("C:/Windows/Fonts/arial.ttf"))
+    {
+        std::cout << "Font failed\n";
+        return -1;
+    }
+
+    // ================= TEXT =================
+    sf::Text instructions(font);
+    instructions.setCharacterSize(18);
+    instructions.setFillColor(sf::Color::Green);
+    instructions.setPosition(sf::Vector2f(460.f, 20.f));
+
+    instructions.setString(
+        "S + Click: Start\n"
+        "E + Click: End\n"
+        "Left Click: Wall\n"
+        "Space: Run BFS\n"
+        "R: Reset"
+    );
+
+    // ================= PANEL =================
+    sf::RectangleShape panel;
+    panel.setSize(sf::Vector2f(230.f, 140.f));
+    panel.setFillColor(sf::Color(0, 0, 0, 200));
+    panel.setPosition(sf::Vector2f(450.f, 10.f));
+
+    panel.setOutlineThickness(2);
+    panel.setOutlineColor(sf::Color::White);
+
+    
 
     bool bfsStarted = false;
 
@@ -71,10 +105,19 @@ if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
     }
 }
 
-        window.clear();
-        grid.draw(window);
-        window.display();
+       window.clear();
+
+grid.draw(window);
+
+window.draw(panel);         // 🔥 ADD THIS
+window.draw(instructions);  // already there
+
+window.display();
     }
 
     return 0;
 }
+
+
+
+
