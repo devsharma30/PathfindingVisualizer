@@ -82,6 +82,9 @@ void Grid::draw(sf::RenderWindow& window)
             else if (grid[i][j] == 4)
                 cell.setFillColor(sf::Color::Blue);
 
+            else if (grid[i][j] == 5)
+                cell.setFillColor(sf::Color::Yellow);    
+
             else
                 cell.setFillColor(sf::Color::White);
 

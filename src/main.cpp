@@ -25,9 +25,15 @@ int main()
 
         grid.handleMouse(window);
         if (bfsStarted)
-        {
-           pathfinder.stepBFS(grid.getGrid());
-        }
+{
+    pathfinder.stepBFS(grid.getGrid());
+
+    if (pathfinder.isFinished())
+    {
+        pathfinder.drawPath(grid.getGrid());
+        bfsStarted = false; 
+    }
+}
 
 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 {
