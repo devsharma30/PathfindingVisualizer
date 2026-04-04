@@ -6,6 +6,7 @@ class Grid
 {
 public:
     Grid(int rows, int cols, int cellSize);
+    void reset();
 
     void handleMouse(sf::RenderWindow& window);
     void draw(sf::RenderWindow& window);

@@ -117,3 +117,21 @@ int Grid::getEndCol()
 {
     return endCol;
 }
+
+
+
+
+
+void Grid::reset()
+{
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            grid[i][j] = 0; // empty
+        }
+    }
+
+    startRow = startCol = -1;
+    endRow = endCol = -1;
+}
