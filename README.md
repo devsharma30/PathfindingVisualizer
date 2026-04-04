@@ -1,7 +1,7 @@
 # 🧭 Pathfinding Visualizer (C++ + SFML)
 
-A visual simulation of pathfinding algorithms built using **C++** and **SFML**.
-This project allows users to interactively create a grid, place obstacles, and visualize how algorithms explore paths.
+A real-time visualization of pathfinding algorithms built using **C++** and **SFML**.
+This project allows users to interactively create a grid, place obstacles, and observe how algorithms explore and compute the shortest path.
 
 ---
 
@@ -9,34 +9,66 @@ This project allows users to interactively create a grid, place obstacles, and v
 
 * 🟦 Interactive grid system
 * ⬛ Mouse-based wall creation
-* 🟢 Start node selection (**Press ****`S`**** + Click**)
-* 🔴 End node selection (**Press ****`E`**** + Click**)
-* 🔵 BFS visualization (visited cells highlighted in real-time)
+* 🟢 Start node selection (**S + Click**)
+* 🔴 End node selection (**E + Click**)
+* 🔵 BFS exploration visualization
+* 🟡 Shortest path reconstruction
 
 ---
 
-## 🛠 Tech Stack
+## 🧠 How It Works
 
-* **Language:** C++
-* **Graphics Library:** SFML
-* **Concepts Used:**
+### 1. Grid Representation
 
-  * Object-Oriented Programming (OOP)
-  * Breadth First Search (BFS)
-  * 2D Grid Representation
-  * Event Handling
+* Implemented using a **2D vector**
+* Each cell stores a state:
+
+  * `0` → Empty
+  * `1` → Wall
+  * `2` → Start
+  * `3` → End
+  * `4` → Visited (BFS)
+  * `5` → Final Path
+
+---
+
+### 2. BFS Algorithm
+
+* Uses a **queue** to explore nodes level-by-level
+* Ensures shortest path in an unweighted grid
+* Maintains a `visited` matrix to avoid revisiting
+
+---
+
+### 3. Parent Tracking (Key Concept)
+
+Each cell stores:
+
+```text
+parent[row][col] = previous cell
+```
+
+This allows reconstruction of the shortest path after reaching the destination.
+
+---
+
+### 4. Path Reconstruction
+
+* Start from the **end node**
+* Follow parent pointers back to the start
+* Mark each cell as part of the path (yellow)
 
 ---
 
 ## ▶️ How to Run
 
-### 1. Compile
+### Compile
 
 ```bash
 g++ src/main.cpp src/Grid.cpp src/Pathfinding.cpp -std=c++17 -IC:\SFML\include -Iinclude -LC:\SFML\lib -lsfml-graphics -lsfml-window -lsfml-system -o main
 ```
 
-### 2. Run
+### Run
 
 ```bash
 .\main.exe
@@ -46,12 +78,12 @@ g++ src/main.cpp src/Grid.cpp src/Pathfinding.cpp -std=c++17 -IC:\SFML\include -
 
 ## 🎮 Controls
 
-| Action         | Input             |
-| -------------- | ----------------- |
-| Create Wall    | Left Click        |
-| Set Start Node | Press `S` + Click |
-| Set End Node   | Press `E` + Click |
-| Run BFS        | Press `Space`     |
+| Action      | Input      |
+| ----------- | ---------- |
+| Create Wall | Left Click |
+| Set Start   | S + Click  |
+| Set End     | E + Click  |
+| Run BFS     | Space      |
 
 ---
 
@@ -73,42 +105,28 @@ PathfindingVisualizer/
 
 ---
 
-## 🧠 How It Works
+## 📌 Concepts Demonstrated
 
-* The grid is represented using a **2D vector**
-* BFS (Breadth First Search) explores the grid **level-by-level**
-* Each visited cell is marked and visualized in **blue**
-* Walls block traversal and are ignored during BFS
-
----
-
-## 🔮 Upcoming Features
-
-* 🎞️ Step-by-step BFS animation
-* 🟡 Shortest path highlighting
-* ⚡ Speed control for visualization
-* 🔁 Reset / Clear grid functionality
-* 🚀 Additional algorithms (Dijkstra, A*)
+* Object-Oriented Programming (OOP)
+* Breadth First Search (BFS)
+* Graph traversal on grids
+* Real-time rendering with SFML
+* State-based simulation
+* Path reconstruction using parent tracking
 
 ---
 
-## ⭐ Notes
+## 🔮 Future Improvements
 
-This project demonstrates:
-
-* Clean project structure using `.h` and `.cpp` separation
-* Implementation of graph traversal algorithms
-* Real-time visualization using SFML
+* ⚡ Dijkstra Algorithm
+* 🚀 A* Algorithm
+* 🎞️ Animation speed control
+* 🔁 Reset / Clear grid
+* 🎮 UI enhancements
 
 ---
 
+## 👨‍💻 Author
 
+**Dev Sharma**
 
-### added something new
-✔ BFS visualization implemented
-✔ Step-by-step animation
-
-
-
-
-CODER:-> DEV SHARMA
