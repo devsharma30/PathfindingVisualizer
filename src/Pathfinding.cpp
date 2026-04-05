@@ -33,8 +33,9 @@ void Pathfinding::stepBFS(std::vector<std::vector<int>>& grid)
     int r = current.first;
     int c = current.second;
 
-    int dr[] = {-1, 1, 0, 0};
-    int dc[] = {0, 0, -1, 1};
+    int dr[] = {0, 1, 0, -1};
+    int dc[] = {1, 0, -1, 0};
+
 
     for (int i = 0; i < 4; i++)
     {
