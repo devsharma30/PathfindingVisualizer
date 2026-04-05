@@ -32,7 +32,7 @@ int main()
         "S + Click: Start\n"
         "E + Click: End\n"
         "Left Click: Wall\n"
-        "Space: Run BFS\n"
+        "Space: BFS/A*\n"
         "R: Reset"
     );
 
@@ -79,7 +79,7 @@ int main()
                     }
         if (bfsStarted)
        {
-           pathfinder.stepBFS(grid.getGrid());
+           pathfinder.stepAStar(grid.getGrid());
 
            if (pathfinder.isFinished())
            {
@@ -99,7 +99,7 @@ if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 
         if (sr >= 0 && sc >= 0 && er >= 0 && ec >= 0)
         {
-            pathfinder.startBFS(grid.getGrid(), sr, sc, er, ec);
+            pathfinder.startAStar(grid.getGrid(), sr, sc, er, ec);
             bfsStarted = true;
         }
     }

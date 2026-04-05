@@ -1,19 +1,37 @@
-# 🧭 Pathfinding Visualizer (C++ + SFML)
+# 🔍 Pathfinding Visualizer (C++ + SFML)
 
-A real-time visualization of pathfinding algorithms built using **C++** and **SFML**.
-This project allows users to interactively create a grid, place obstacles, and observe how algorithms explore and compute the shortest path.
+An interactive **pathfinding visualizer** built using **C++ and SFML**, demonstrating how classic graph algorithms work in real time through dynamic visualization.
 
 ---
 
 ## 🚀 Features
 
-* 🟦 Interactive grid system
-* ⬛ Mouse-based wall creation
-* 🟢 Start node selection (**S + Click**)
-* 🔴 End node selection (**E + Click**)
-* 🔵 BFS exploration visualization
-* 🟡 Shortest path reconstruction
+* 🟢 Interactive grid-based environment
+* 🧱 Draw and erase walls using mouse
+* 🎯 Set start and end nodes dynamically
+* ⚡ Visualize **Breadth First Search (BFS)**
+* 🧠 Visualize **A* (A-Star) algorithm**
+* 🎨 Real-time color-coded visualization:
 
+  * Blue → explored nodes
+  * Yellow → shortest path
+  * Green → start node
+  * Red → end node
+  * Black → obstacles (walls)
+
+---
+
+## 🎮 Controls
+
+| Input      | Action         |
+| ---------- | -------------- |
+| S + Click  | Set Start Node |
+| E + Click  | Set End Node   |
+| Left Click | Draw Walls     |
+| Space      | Run Algorithm  |
+| R          | Reset Grid     |
+
+---
 ---
 
 ## 🧠 How It Works
@@ -32,101 +50,51 @@ This project allows users to interactively create a grid, place obstacles, and o
 
 ---
 
-### 2. BFS Algorithm
+## 🧠 Algorithms Implemented
 
-* Uses a **queue** to explore nodes level-by-level
-* Ensures shortest path in an unweighted grid
-* Maintains a `visited` matrix to avoid revisiting
+### 🔹 Breadth First Search (BFS)
 
----
+* Explores nodes level by level
+* Guarantees shortest path in unweighted grids
+* Slower due to uniform exploration
 
-### 3. Parent Tracking (Key Concept)
+### 🔹 A* (A-Star)
 
-Each cell stores:
-
-```text
-parent[row][col] = previous cell
-```
-
-This allows reconstruction of the shortest path after reaching the destination.
+* Uses **Manhattan distance heuristic**
+* Prioritizes nodes closer to goal
+* Faster and more efficient than BFS
+* Produces optimal shortest path
 
 ---
 
-### 4. Path Reconstruction
+## 🛠️ Tech Stack
 
-* Start from the **end node**
-* Follow parent pointers back to the start
-* Mark each cell as part of the path (yellow)
+* **C++ (Core Logic & Algorithms)**
+* **SFML (Simple and Fast Multimedia Library)** for rendering
 
 ---
 
-## ▶️ How to Run
+## ⚙️ Build & Run
 
-### Compile
+Make sure SFML is installed and linked properly.
 
 ```bash
-g++ src/main.cpp src/Grid.cpp src/Pathfinding.cpp -std=c++17 -IC:\SFML\include -Iinclude -LC:\SFML\lib -lsfml-graphics -lsfml-window -lsfml-system -o main
-```
-
-### Run
-
-```bash
-.\main.exe
+g++ src/main.cpp src/Grid.cpp src/Pathfinding.cpp -std=c++17 -I<sfml_include> -L<sfml_lib> -lsfml-graphics -lsfml-window -lsfml-system -o main
+./main
 ```
 
 ---
 
-## 🎮 Controls
+## 💡 Future Improvements
 
-| Action      | Input      |
-| ----------- | ---------- |
-| Create Wall | Left Click |
-| Set Start   | S + Click  |
-| Set End     | E + Click  |
-| Run BFS     | Space      |
-
----
-
-## 📂 Project Structure
-
-```
-PathfindingVisualizer/
-├── src/
-│   ├── main.cpp
-│   ├── Grid.cpp
-│   ├── Pathfinding.cpp
-├── include/
-│   ├── Grid.h
-│   ├── Pathfinding.h
-├── assets/
-├── README.md
-├── .gitignore
-```
-
----
-
-## 📌 Concepts Demonstrated
-
-* Object-Oriented Programming (OOP)
-* Breadth First Search (BFS)
-* Graph traversal on grids
-* Real-time rendering with SFML
-* State-based simulation
-* Path reconstruction using parent tracking
-
----
-
-## 🔮 Future Improvements
-
-* ⚡ Dijkstra Algorithm
-* 🚀 A* Algorithm
-* 🎞️ Animation speed control
-* 🔁 Reset / Clear grid
-* 🎮 UI enhancements
+* 🔄 Toggle between BFS and A* during runtime
+* ⏱️ Adjustable visualization speed
+* ↘️ Diagonal movement support
+* 📊 Add Dijkstra’s Algorithm
+* 🖥️ Improved UI panel / controls
 
 ---
 
 ## 👨‍💻 Author
 
 **Dev Sharma**
-

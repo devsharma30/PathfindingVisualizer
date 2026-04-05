@@ -11,6 +11,16 @@ public:
 
     void stepBFS(std::vector<std::vector<int>>& grid);
 
+
+    /// using something like f=g+h formula for good moving in grid instead of random moving
+
+
+    void startAStar(std::vector<std::vector<int>>& grid,
+                int startRow, int startCol,
+                int endRow, int endCol);
+
+void stepAStar(std::vector<std::vector<int>>& grid);
+
     void drawPath(std::vector<std::vector<int>>& grid);
     bool isFinished();
 
@@ -23,7 +33,24 @@ private:
 
 
     std::vector<std::vector<std::pair<int,int>>> parent;
+    int heuristic(int r, int c);
+
+
+   std::priority_queue<
+    std::pair<int, std::pair<int,int>>,
+    std::vector<std::pair<int, std::pair<int,int>>>,
+    std::greater<>
+> pq;
+
+std::vector<std::vector<int>> gCost; 
 
 int endRow, endCol;
 bool pathFound = false;
 };
+
+
+
+
+
+
+
