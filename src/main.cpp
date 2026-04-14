@@ -2,6 +2,8 @@
 #include "Grid.h"
 #include "Pathfinding.h"
 #include <iostream>
+#include <sstream>
+#include <iomanip>
 bool keyPressedToggle = false;
 
 int main()
@@ -27,6 +29,10 @@ sf::Clock clock;
 
     // ================= TEXT =================
     sf::Text instructions(font);
+    sf::Text statusText(font);
+statusText.setCharacterSize(16);
+statusText.setFillColor(sf::Color::Green);
+statusText.setPosition(sf::Vector2f(460.f, 160.f));
     instructions.setCharacterSize(18);
     instructions.setFillColor(sf::Color::Green);
     instructions.setPosition(sf::Vector2f(460.f, 20.f));
@@ -43,7 +49,7 @@ sf::Clock clock;
 
     // ================= PANEL =================
     sf::RectangleShape panel;
-    panel.setSize(sf::Vector2f(230.f, 165.f));
+    panel.setSize(sf::Vector2f(230.f, 195.f));
     panel.setFillColor(sf::Color(0, 0, 0, 200));
     panel.setPosition(sf::Vector2f(450.f, 10.f));
 
@@ -91,17 +97,23 @@ else
 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
 {
     delay -= 0.001f;
-    if (delay < 0.005f) delay = 0.005f;
+    if (delay < 0.001f) delay = 0.001f;
 }
 
 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
 {
     delay += 0.001f;
-    if (delay > 0.2f) delay = 0.2f;
+    if (delay > 0.3f) delay = 0.3f;
 }
 
 
         grid.handleMouse(window);
+        std::string mode = useAStar ? "A*" : "BFS";
+
+statusText.setString(
+    "Mode: " + mode + "\n" +
+    "Speed: " + std::to_string((int)(delay * 1000))
+);
 
 
         static bool keyPressed = false;
@@ -168,8 +180,9 @@ else
 
 grid.draw(window);
 
-window.draw(panel);         // 🔥 ADD THIS
-window.draw(instructions);  // already there
+window.draw(panel);        
+window.draw(instructions);
+window.draw(statusText);  
 
 window.display();
     }
