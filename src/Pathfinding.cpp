@@ -155,6 +155,9 @@ void Pathfinding::stepAStar(std::vector<std::vector<int>>& grid)
     {
         int nr = r + dr[i];
         int nc = c + dc[i];
+     
+if (heuristic(nr, nc) > heuristic(r, c) + 2)
+    continue;
 
         if (nr >= 0 && nr < rows && nc >= 0 && nc < cols)
         {
