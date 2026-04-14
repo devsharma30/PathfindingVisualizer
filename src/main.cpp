@@ -14,6 +14,8 @@ int main()
     sf::RenderWindow window(sf::VideoMode(sf::Vector2u(COLS * CELL_SIZE, ROWS * CELL_SIZE)), "Pathfinding Visualizer");
 
     Grid grid(ROWS, COLS, CELL_SIZE);  // shift grid down
+    float delay = 0.05f;
+sf::Clock clock;
 
  // ================= FONT =================
     sf::Font font;
@@ -35,12 +37,13 @@ int main()
         "Left Click: Wall\n"
         "Space: Run\n"
         "1:BFS | 2: A*\n"
+        "UP/DOWN: speed\n"
         "R: Reset"
     );
 
     // ================= PANEL =================
     sf::RectangleShape panel;
-    panel.setSize(sf::Vector2f(230.f, 140.f));
+    panel.setSize(sf::Vector2f(230.f, 165.f));
     panel.setFillColor(sf::Color(0, 0, 0, 200));
     panel.setPosition(sf::Vector2f(450.f, 10.f));
 
@@ -83,6 +86,20 @@ else
 {
     keyPressedToggle = false;
 }
+ 
+
+if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
+{
+    delay -= 0.001f;
+    if (delay < 0.005f) delay = 0.005f;
+}
+
+if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
+{
+    delay += 0.001f;
+    if (delay > 0.2f) delay = 0.2f;
+}
+
 
         grid.handleMouse(window);
 
@@ -104,23 +121,24 @@ else
                         } 
 
                     }
-        if (bfsStarted)
-       {
-           if (useAStar)
-          {
-              pathfinder.stepAStar(grid.getGrid());
-          }
-          else
-          {
-             pathfinder.stepBFS(grid.getGrid());
-          }
+      if (bfsStarted)
+{
+    if (clock.getElapsedTime().asSeconds() > delay)
+    {
+        if (useAStar)
+            pathfinder.stepAStar(grid.getGrid());
+        else
+            pathfinder.stepBFS(grid.getGrid());
 
-           if (pathfinder.isFinished())
-           {
-               pathfinder.drawPath(grid.getGrid());
-               bfsStarted = false; 
-           }
-      } 
+        clock.restart();
+    }
+
+    if (pathfinder.isFinished())
+    {
+        pathfinder.drawPath(grid.getGrid());
+        bfsStarted = false;
+    }
+}
 
 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 {
