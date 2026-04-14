@@ -2,6 +2,7 @@
 #include "Grid.h"
 #include "Pathfinding.h"
 #include <iostream>
+bool keyPressedToggle = false;
 
 int main()
 { 
@@ -32,7 +33,8 @@ int main()
         "S + Click: Start\n"
         "E + Click: End\n"
         "Left Click: Wall\n"
-        "Space: BFS/A*\n"
+        "Space: Run\n"
+        "1:BFS | 2: A*\n"
         "R: Reset"
     );
 
@@ -48,6 +50,7 @@ int main()
     
 
     bool bfsStarted = false;
+    bool useAStar = true;  // true = A*, false = BFS
 
     while (window.isOpen())
     {
@@ -56,6 +59,30 @@ int main()
             if (event->is<sf::Event::Closed>())
                 window.close();
         }
+if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num1))
+{
+    if (!keyPressedToggle)
+    {
+        useAStar = false;
+        grid.clearPath();
+        bfsStarted = false;  // reset algorithm
+        keyPressedToggle = true;
+    }
+}
+else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Num2))
+{
+    if (!keyPressedToggle)
+    {
+        useAStar = true;
+        grid.clearPath();
+        bfsStarted = false;
+        keyPressedToggle = true;
+    }
+}
+else
+{
+    keyPressedToggle = false;
+}
 
         grid.handleMouse(window);
 
@@ -79,7 +106,14 @@ int main()
                     }
         if (bfsStarted)
        {
-           pathfinder.stepAStar(grid.getGrid());
+           if (useAStar)
+          {
+              pathfinder.stepAStar(grid.getGrid());
+          }
+          else
+          {
+             pathfinder.stepBFS(grid.getGrid());
+          }
 
            if (pathfinder.isFinished())
            {
@@ -99,7 +133,14 @@ if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 
         if (sr >= 0 && sc >= 0 && er >= 0 && ec >= 0)
         {
-            pathfinder.startAStar(grid.getGrid(), sr, sc, er, ec);
+            if (useAStar)
+{
+    pathfinder.startAStar(grid.getGrid(), sr, sc, er, ec);
+}
+else
+{
+    pathfinder.startBFS(grid.getGrid(), sr, sc, er, ec);
+}
             bfsStarted = true;
         }
     }

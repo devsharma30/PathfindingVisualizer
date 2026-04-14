@@ -149,6 +149,8 @@ void Pathfinding::stepAStar(std::vector<std::vector<int>>& grid)
     int dr[] = {0, 1, 0, -1};
     int dc[] = {1, 0, -1, 0};
 
+    
+
     for (int i = 0; i < 4; i++)
     {
         int nr = r + dr[i];
@@ -156,6 +158,9 @@ void Pathfinding::stepAStar(std::vector<std::vector<int>>& grid)
 
         if (nr >= 0 && nr < rows && nc >= 0 && nc < cols)
         {
+
+            if (heuristic(nr, nc) > heuristic(r, c) + 5)
+    continue;
             if (grid[nr][nc] == 1) continue;
 
             int newG = gCost[r][c] + 1;
@@ -168,8 +173,11 @@ void Pathfinding::stepAStar(std::vector<std::vector<int>>& grid)
                 int f = newG + heuristic(nr, nc);
                 pq.push({f, {nr, nc}});
 
-                if (grid[nr][nc] != 3)
-                    grid[nr][nc] = 4;
+                if (grid[nr][nc] != 3 && grid[nr][nc] != 2)
+{
+    if (gCost[nr][nc] < 20)   // limit spread
+        grid[nr][nc] = 4;
+}
             }
         }
     }

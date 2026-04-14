@@ -17,6 +17,8 @@ public:
     int getEndRow();
     int getEndCol();
 
+    void clearPath();
+
 private:
     int rows, cols, cellSize;
     std::vector<std::vector<int>> grid;

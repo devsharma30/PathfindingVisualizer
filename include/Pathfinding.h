@@ -24,6 +24,8 @@ void stepAStar(std::vector<std::vector<int>>& grid);
     void drawPath(std::vector<std::vector<int>>& grid);
     bool isFinished();
 
+    
+
 private:
     std::queue<std::pair<int,int>> q;
     std::vector<std::vector<bool>> visited;
